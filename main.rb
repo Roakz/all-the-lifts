@@ -12,34 +12,10 @@
 
 app_config = { :lifts => 4 }
 
-class Lift 
+require './class/lift_store'
+require './class/lift'
 
-attr_reader :lift_num
- 
-  def initialize(lift_num, store)
-    @lift_num = lift_num
-    self.add_to_store(store)
-  end
-
-  def add_to_store(store)
-    store.store_lift(self)
-  end
-end
-
-class LiftStore
-
-  attr_accessor :stored_lifts, :store_lift , :lifts
-
-  def initialize
-    @stored_lifts = 0
-    @lifts = []
-  end
-
-  def store_lift(lift)
-    @stored_lifts = @stored_lifts += 1
-    @lifts << lift
-  end
-end 
+class 
 
 lift_store = LiftStore.new()
 
@@ -55,11 +31,3 @@ create_lifts(lift_store, app_config)
 
 p lift_store.stored_lifts
 p lift_store.lifts
-
-
-
-
-
-# build out lift objects with required parameters
-# rehash on setting required lifts by user and look into dynamic rendering of the lift names.
-
