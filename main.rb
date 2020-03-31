@@ -11,6 +11,14 @@
 # - If a lift is completley free it returns to ground.
 
 # - When a journey finshes there is a log to the console
+
+app_config = {
+
+:lifts => 4,
+
+}
+
+
 class Lift 
 
 attr_reader :lift_num
@@ -23,41 +31,56 @@ attr_reader :lift_num
   end
 
   def add_to_store(store)
-    store.store_lift()
+    store.store_lift(self)
   end
 
 end
 
 class LiftStore
 
-  attr_accessor :stored_lifts, :store_lift 
+  attr_accessor :stored_lifts, :store_lift , :lifts
 
   def initialize
   
     @stored_lifts = 0
+    @lifts = []
   
   end
 
-  def store_lift()
+  def store_lift(lift)
   
     @stored_lifts = @stored_lifts += 1
+    @lifts << lift
   
   end
 
 end 
 
 lift_store = LiftStore.new()
-def local_variable_set(lifts, num)
- lifts << :"lift_#{num + 1}".to_sym => Lift.new((num + 1), lift_store)
+
+def create_lifts(store, app_config)
+
+count = 0
+
+  while count < app_config[:lifts]
+
+    store.lifts[count] = Lift.new((count + 1), store)
+
+    count += 1
+
+  end
+
+
 end
 
-lifts = {}
-count = 0
-while count < 3
-local_variable_set(lifts, 1)
-count += 1
-end
+create_lifts(lift_store, app_config)
+
 p lift_store.stored_lifts
+p lift_store.lifts
+
+
+
+
 
 # build out lift objects with required parameters
 # rehash on setting required lifts by user and look into dynamic rendering of the lift names.
