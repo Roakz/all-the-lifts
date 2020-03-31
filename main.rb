@@ -1,5 +1,3 @@
-# There are 4 lifts provided initially 
-
 # A floor is selected and the current floor, destination and travellers name is provided, lift object requires total travel time.
 
 # Some mathemtical genius will be ensued....notes for that:
@@ -12,28 +10,20 @@
 
 # - When a journey finshes there is a log to the console
 
-app_config = {
-
-:lifts => 4,
-
-}
-
+app_config = { :lifts => 4 }
 
 class Lift 
 
 attr_reader :lift_num
  
   def initialize(lift_num, store)
-  
     @lift_num = lift_num
     self.add_to_store(store)
-  
   end
 
   def add_to_store(store)
     store.store_lift(self)
   end
-
 end
 
 class LiftStore
@@ -41,36 +31,24 @@ class LiftStore
   attr_accessor :stored_lifts, :store_lift , :lifts
 
   def initialize
-  
     @stored_lifts = 0
     @lifts = []
-  
   end
 
   def store_lift(lift)
-  
     @stored_lifts = @stored_lifts += 1
     @lifts << lift
-  
   end
-
 end 
 
 lift_store = LiftStore.new()
 
 def create_lifts(store, app_config)
-
 count = 0
-
   while count < app_config[:lifts]
-
     store.lifts[count] = Lift.new((count + 1), store)
-
     count += 1
-
   end
-
-
 end
 
 create_lifts(lift_store, app_config)
