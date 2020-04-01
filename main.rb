@@ -12,6 +12,7 @@
 
 app_config = { :lifts => 4, :levels => 10 }
 
+require  "tty-prompt"
 require './class/lift_store'
 require './class/lift'
 require './class/the_dark_tower'
@@ -20,6 +21,7 @@ require './class/travel_master_3000'
 lift_store = LiftStore.new()
 the_dark_tower = TheDarkTower.new(app_config[:levels])
 travel_master_3000 = TravelMaster3000.new(app_config[:levels], app_config[:lifts])
+prompt = TTY::Prompt.new
 
 def create_lifts(store, app_config)
 count = 0
@@ -31,8 +33,5 @@ end
 
 create_lifts(lift_store, app_config)
 
-p lift_store.stored_lifts
-p lift_store.lifts
-p the_dark_tower.levels
-p travel_master_3000.lifts
-p travel_master_3000.levels
+choices = ['Holla for a lift!', 'See who is where?']
+prompt.select("What would you like to do?", choices)

@@ -8,6 +8,7 @@ def initialize(levels, lifts)
 
   @levels = levels
   @lifts = lifts
+  @travel_time_per_floor = 3 # <== 3 seconds per floor
 
 end
 

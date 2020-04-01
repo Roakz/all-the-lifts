@@ -8,11 +8,11 @@ def setup
 end
 
 def test_initializes_with_number_of_lifts
-  assert_equal(@travel_master_3000.lifts, 4, message = "Travel master lifts initialized")
+  assert_equal(@travel_master_3000.lifts, 4)
 end
 
 def test_initializes_with_number_of_levels
-  assert_equal(@travel_master_3000.levels, 10, message = "Travel master levels initialized")
+  assert_equal(@travel_master_3000.levels, 10)
 end
 
 end
