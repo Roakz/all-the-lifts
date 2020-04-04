@@ -1,14 +1,3 @@
-# A floor is selected and the current floor, destination and travellers name is provided, lift object requires total travel time.
-
-# Some mathemtical genius will be ensued....notes for that:
-# - There are 20 levels
-# - lifts have a travel time per floor 
-# - A travel time left for each lift is calculated and distance to travel back to the traveller is taken into account
-# - whichever lift will get there quikest is allocated the job which is added to its stack
-# - Lifts have a capacity of 10 people per lift
-# - If a lift is completley free it returns to ground.
-
-# - When a journey finshes there is a log to the console
 
 app_config = { :lifts => 4, :levels => 10 }
 
@@ -34,4 +23,7 @@ end
 create_lifts(lift_store, app_config)
 
 choices = ['Holla for a lift!', 'See who is where?']
-prompt.select("What would you like to do?", choices)
+task_selection = prompt.select("What would you like to do?", choices)
+
+task_selection == choices[0] ? job = travel_master_3000.request_travel_info(prompt, lift_store) : "insert a see who is where thing here" 
+
