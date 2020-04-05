@@ -28,3 +28,6 @@ task_selection = prompt.select("What would you like to do?", choices)
 task_selection == choices[0] ? job = travel_master_3000.request_travel_info(prompt, lift_store) : "insert a see who is where thing here" 
 
 # look into a timer and how dynamically monitor the travel time. execute a job
+# State Managment notes: 
+# Lift_state - active - waiting
+# 

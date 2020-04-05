@@ -16,7 +16,7 @@ attr_reader :levels, :lifts, :job
     end
   end
 
-  def dispatch_job(opts = {})
+  def dispatch_job(job, opts = {})
     if opts.fetch(:current_level) == 0
       @shortest_time = []
       opts[:lift_store].lifts.each do |lift|
@@ -27,9 +27,9 @@ attr_reader :levels, :lifts, :job
       end
       if !@shortest_time.instance_of? Array
         # @shortest_time is now a lift in this block
-        @shortest_time.job_que << job
-        p @shortest_time.job_que
+        return @shortest_time.job_quer(job)
       end
+      p @shortest_time
     end
   end
 
@@ -43,6 +43,6 @@ attr_reader :levels, :lifts, :job
       # Adjust travel time each time that a lift job que is changed
       :travel_time => calculate_initial_travel_time(@job_floor, opts = {:current_level => 0})
     }
-    dispatch_job(opts = {:current_level => 0, :lift_store => lift_store})
+    dispatch_job(@job, opts = {:current_level => 0, :lift_store => lift_store})
   end
 end
