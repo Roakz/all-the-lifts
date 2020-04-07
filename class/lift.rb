@@ -1,3 +1,5 @@
+require 'timers'
+
 class Lift 
 
 attr_reader :lift_num, :time_until_free, :job_que
@@ -35,10 +37,17 @@ attr_reader :lift_num, :time_until_free, :job_que
     @job_que << job 
   end
 
+  # currently for one lift to be multithreaded
   def do_work
-    while state?(:active) == true && @job_que.length > 0
-      puts "working"
+    timers = Timers::Group.new
+    File.open("Lift#{@lift_num}_movements.txt", 'w') do |file|
+      while state?(:active) == true && @job_que.length > 0
+        job = @job_que[0]
+        job_timer = timers.after(job.fetch(:travel_time)) { file << "Dropping #{job.fetch(:traveller)} at level #{job.fetch(:floor)}" }
+        timers.wait
+        @job_que.reject! {|job| job == @job_que[0]}
+        # Put some logging stuff here about the next job and append to file
+      end
     end
   end
-   
 end
