@@ -29,6 +29,8 @@ attr_reader :levels, :lifts, :job
         # @shortest_time is now a lift in this block
         return @shortest_time.job_quer(job)
       end
+      # write code to select the shortest time and append a job to the correct lift
+      # insert mathematical genious here
       p @shortest_time
     end
   end
@@ -40,7 +42,7 @@ attr_reader :levels, :lifts, :job
     @job = {
       :floor => @job_floor,
       :traveller => @job_traveller,
-      # Adjust travel time each time that a lift job que is changed
+      :current_level => "Ground",
       :travel_time => calculate_initial_travel_time(@job_floor, opts = {:current_level => 0})
     }
     dispatch_job(@job, opts = {:current_level => 0, :lift_store => lift_store})

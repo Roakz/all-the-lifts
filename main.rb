@@ -21,11 +21,16 @@ count = 0
 end
 
 create_lifts(lift_store, app_config)
-done = false
 
 loop do
   choices = ['Holla for a lift!', 'See who is where?', 'View Lift movements.', 'Sayonara!']
   task_selection = prompt.select("What would you like to do?", choices)
   task_selection == choices[0] ? job = travel_master_3000.request_travel_info(prompt, lift_store) : "insert a see who is where thing here" 
-  exit if task_selection == "Sayonara!" 
+  if task_selection == "Sayonara!" 
+    lift_store.lifts.each do |lift|
+      File.delete(lift.movements)
+    end
+    puts "Thanks for travelling friend !"
+    exit
+  end
 end
